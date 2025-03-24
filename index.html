@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map of Hunza</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+
+    <link rel="stylesheet" href="css/geo.css" />
+   
+</head>
+<body>
+        <div id="map-container">
+        <div id="map"></div>
+        <div class="right-sidebar">
+            <div class="checkbox-container">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search...">
+                    <button onclick="searchData()">Search</button>
+                    
+                </div>
+              
+                <div id="imageModal" class="modal" onclick="closeLargeImage()">
+                    <span class="close">&times;</span>
+                    <img id="largeImage" class="modal-content">
+                </div>
+                <label><input type="checkbox" id="boundaryCheckbox" checked> Boundary</label>
+                <label><input type="checkbox" id="hotelCheckbox" checked> Indicators</label>
+                <label> Roads</label>
+                <div class="sub-checkbox">
+                    <label><input type="checkbox" id="highwaysCheckbox" checked> Highways</label>
+                    <label><input type="checkbox" id="linkRoadsCheckbox" checked> Link Roads</label>
+                    <label><input type="checkbox" id="residentRoadsCheckbox" checked> Residential Roads</label>
+                </div>
+                <label><input type="checkbox" id="touristPointsCheckbox" checked> Points</label>
+                <label><input type="checkbox" id="villagesCheckbox" checked> Potholes</label>
+                <label><input type="checkbox" id="passesCheckbox"checked> Passes</label>
+                <label><input type="checkbox" id="tracksCheckbox"checked> Tracks</label>
+                <label><input type="checkbox" id="glaciersCheckbox"> Nearby Locations</label>
+            </div>
+            <div class="button-container">
+                <button class="print-button" onclick="printMap()">Print Map</button>
+
+                <!-- <button class="print-button" onclick="p';''rintMap()">Print Map</button> -->
+                <button class="reset" onclick="resetZoom()">Reset Zoom</button>
+            </div>
+            
+            <div class="map-navigation-controls">
+                <button onclick="smoothZoomIn()" class="control-button zoom-in">+</button>
+                <button onclick="panLeft()" class="control-button pan-left">&#8592;</button>
+                <button onclick="panRight()" class="control-button pan-right">&#8594;</button>
+                <button onclick="smoothZoomOut()" class="control-button zoom-out">&#8722;</button>
+            </div>
+           
+        </div>
+    </div>
+    
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+    <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <script src="js/geo.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.bubble-marker img');
+    const closeButtons = document.querySelectorAll('.close-fullscreen');
+
+    images.forEach((image, index) => {
+        image.addEventListener('click', function() {
+            this.classList.toggle('full-screen-image');
+            closeButtons[index].style.display = this.classList.contains('full-screen-image') ? 'block' : 'none';
+        });
+    });
+
+    closeButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            images[index].classList.remove('full-screen-image');
+            this.style.display = 'none';
+        });
+    });
+});
+// Function to open large image in a modal
+function openLargeImage(imageUrl) {
+    document.getElementById("largeImage").src = imageUrl;
+    document.getElementById("imageModal").style.display = "block";
+}
+
+// Function to close the modal
+function closeLargeImage() {
+    document.getElementById("imageModal").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>

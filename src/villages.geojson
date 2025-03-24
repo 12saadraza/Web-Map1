@@ -1,0 +1,487 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+ 
+
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.28621084,24.86271914,0 ]
+   },
+   "properties": {
+   "OBJECTID":57,
+   "OID_":"0",
+   "name":"pothole-13",
+   "desc":"Daewoo Motor Pakistan to Toyota Roundabout",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.18224767,24.88219602,0 ]
+   },
+   "properties": {
+   "OBJECTID":58,
+   "OID_":"0",
+   "name":"pothole-1",
+   "desc":"Kalaboard to DHO Malir Office",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.19069898,24.87752001,0 ]
+   },
+   "properties": {
+   "OBJECTID":59,
+   "OID_":"0",
+   "name":"pothole-2",
+   "desc":"DHO Malir Office to Nadra Registration Centre",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.19803532,24.87146367,0 ]
+   },
+   "properties": {
+   "OBJECTID":60,
+   "OID_":"0",
+   "name":"pothole-3",
+   "desc":"Nadra Registration Centre to Mid of Qomi Shahrah Bridge",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.20462339,24.86487797,0 ]
+   },
+   "properties": {
+   "OBJECTID":61,
+   "OID_":"0",
+   "name":"pothole-4",
+   "desc":"Mid of Qomi Shahrah Bridge to Total Parco Service Station",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.20960298,24.85708078,0 ]
+   },
+   "properties": {
+   "OBJECTID":62,
+   "OID_":"0",
+   "name":"pothole-5",
+   "desc":"Total Parco Service Station to Abbot Factory",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.21866199,24.85484388,0 ]
+   },
+   "properties": {
+   "OBJECTID":63,
+   "OID_":"0",
+   "name":"pothole-6",
+   "desc":"Abbot Factory to Manzil Pump",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.22855558,24.8548271,0 ]
+   },
+   "properties": {
+   "OBJECTID":64,
+   "OID_":"0",
+   "name":"pothole-7",
+   "desc":"Manzil Pump to Dawlance Company",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.23841932,24.85420615,0 ]
+   },
+   "properties": {
+   "OBJECTID":65,
+   "OID_":"0",
+   "name":"pothole-8",
+   "desc":"Dawlance Company to Qasim Factory",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.24812466,24.853154,0 ]
+   },
+   "properties": {
+   "OBJECTID":66,
+   "OID_":"0",
+   "name":"pothole-9",
+   "desc":"Qasim Factory to Abdul Rashid Lahore Iron Works",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.25753419,24.85576015,0 ]
+   },
+   "properties": {
+   "OBJECTID":67,
+   "OID_":"0",
+   "name":"pothole-10",
+   "desc":"Abdul Rashid Lahore Iron Works to Mateen Complex",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.26706876,24.85814014,0 ]
+   },
+   "properties": {
+   "OBJECTID":69,
+   "OID_":"0",
+   "name":"pothole-11",
+   "desc":"Court Industrial Park to Daewoo Motor Pakistan",
+   "imageUrl":"src/village/mubatabadshimshal.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.065552,24.990426,0 ]
+   },
+   "properties": {
+   "OBJECTID":70,
+   "OID_":"0",
+   "name":"pothole-New Karachi",
+   "desc":"New Karachi Town",
+   "imageUrl":"/src/village/Barriers New Karachi town.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.065552,24.99087,0 ]
+   },
+   "properties": {
+   "OBJECTID":71,
+   "OID_":"0",
+   "name":"pothole-New Karachi",
+   "desc":"New Karachi Town",
+   "imageUrl":"/src/village/Broken Footpath1.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.065412,24.993327,0 ]
+   },
+   "properties": {
+   "OBJECTID":72,
+   "OID_":"0",
+   "name":"pothole-New Karachi",
+   "desc":"New Karachi Town",
+   "imageUrl":"/src/village/Broken Footpath.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.066719,24.97253,0 ]
+   },
+   "properties": {
+   "OBJECTID":73,
+   "OID_":"0",
+   "name":"pothole-North Karachi",
+   "desc":"Shahrah-e-Usman North Karachi",
+   "imageUrl":"/src/village/Chinchi 1.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.066335,24.971582,0 ]
+   },
+   "properties": {
+   "OBJECTID":74,
+   "OID_":"0",
+   "name":"pothole-North Karachi",
+   "desc":"Shahrah-e-Usman North Karachi",
+   "imageUrl":"/src/village/Chinchi 2.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.06663,24.973218,0 ]
+   },
+   "properties": {
+   "OBJECTID":75,
+   "OID_":"0",
+   "name":"pothole-North Karachi",
+   "desc":"North Karachi",
+   "imageUrl":"/src/village/Chinchi.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.065412,24.993327,0 ]
+   },
+   "properties": {
+   "OBJECTID":76,
+   "OID_":"0",
+   "name":"pothole-New Karachi",
+   "desc":"New Karachi Town",
+   "imageUrl":"/src/village/Cracks.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ },
+ {
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates":  [ 67.064547,25.005768,0 ]
+   },
+   "properties": {
+   "OBJECTID":77,
+   "OID_":"0",
+   "name":"pothole-19",
+   "desc":"Damage Road 1 ",
+   "imageUrl":"/src/village/Chinchi.jpg",
+   "FolderPath":"Hunza",
+   "SymbolID":"0",
+   "AltMode":0,
+   "Base":"0",
+   "Snippet":"",
+   "PopupInfo":"",
+   "HasLabel":0,
+   "LabelID":"0",
+   "Type":"Village",
+   "name_1":""
+   }
+ }
+]
+}
