@@ -9,6 +9,23 @@ closePopupOnClick: false // Disable closing popups on map click
       maxZoom: 18,
       attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
   }).addTo(map);
+
+  // Add these right after map initialization
+let activePopup = null;
+
+// Add popup control handler
+map.on('popupopen', function(e) {
+    if (activePopup && activePopup !== e.popup) {
+        map.closePopup(activePopup);
+    }
+    activePopup = e.popup;
+});
+
+map.on('popupclose', function(e) {
+    if (activePopup === e.popup) {
+        activePopup = null;
+    }
+});
   function addLabels(feature, layer) {
       if (feature.properties && feature.properties.name) {
           layer.bindTooltip(feature.properties.name, { permanent: false, direction: 'auto' });
@@ -19,46 +36,42 @@ closePopupOnClick: false // Disable closing popups on map click
     var selectedLayers = [];
 
     // List of your checkbox IDs
-    var checkboxes = ['villagesCheckbox', 'passesCheckbox', 'hotelCheckbox', 'touristPointsCheckbox', 'potholesCheckbox'];
+    var checkboxes = ['villagesCheckbox', 'villages1Checkbox', 'passesCheckbox', 'hotelCheckbox', 'touristPointsCheckbox', 'potholesCheckbox'];
     checkboxes.forEach(function (checkboxId) {
         var checkbox = document.getElementById(checkboxId);
         if (checkbox && checkbox.checked) {
             selectedLayers.push(checkboxId.replace('Checkbox', '').toLowerCase());
         }
     });
-// Modify the popups where images are included
-function createPopupContent(feature) {
-    let popupContent = '';
-
-    if (feature.properties.name) {
-        popupContent += `<strong>${feature.properties.name}</strong><br>`;
-    }
-    if (feature.properties.desc) {
-        popupContent += `${feature.properties.desc}<br>`;
-    }
-    if (feature.properties.imageUrl) {
-        popupContent += `
-            <img src="${feature.properties.imageUrl}" 
-                 alt="${feature.properties.name}" 
-                 style="width:300%; height:320px; cursor:pointer;" 
-                 onclick="openLargeImage('${feature.properties.imageUrl}')">
-        `;
-    }
-
-    return popupContent;
-}
 
 // Function to create markers with popups
 function createMarker(feature, latlng, iconType) {
-    let marker = L.marker(latlng, { icon: icons[iconType] });
+    let marker = L.marker(latlng, { 
+        icon: icons[iconType],
+        riseOnHover: true  // Bring marker to front when hovering
+    });
 
     if (feature.properties) {
-        marker.bindPopup(createPopupContent(feature), { autoClose: false });
-    }
+        marker.bindPopup(createPopupContent(feature), { 
+            autoClose: false,
+            closeButton: false, // We'll add custom close button
+            className: 'forced-popup'
+        });
 
+        // Add custom close button
+        marker.on('popupopen', function(e) {
+            const popup = e.popup;
+            const closeBtn = L.DomUtil.create('button', 'popup-close');
+            closeBtn.innerHTML = '×';
+            closeBtn.onclick = () => map.closePopup(popup);
+            
+            popup.getElement()
+                .querySelector('.leaflet-popup-content-wrapper')
+                .prepend(closeBtn);
+        });
+    }
     return marker;
 }
-
 // Apply to various layers
 var touristPointsLayer = L.geoJSON.ajax('src/touristpoints1.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -66,13 +79,13 @@ var touristPointsLayer = L.geoJSON.ajax('src/touristpoints1.geojson', {
     }
 }).addTo(map);
 
-var hotelsLayer = L.geoJSON.ajax('src/hotels1.geojson', {
+var hotelsLayer = L.geoJSON.ajax('src/hotels2.geojson', {
     pointToLayer: function (feature, latlng) {
         return createMarker(feature, latlng, 'hotels');
     }
 }).addTo(map);
 
-var passesLayer = L.geoJSON.ajax('src/passes1.geojson', {
+var passesLayer = L.geoJSON.ajax('src/passes.geojson', {
     pointToLayer: function (feature, latlng) {
         return createMarker(feature, latlng, 'passes');
     }
@@ -83,6 +96,7 @@ var villagesLayer = L.geoJSON.ajax('src/villages.geojson', {
         return createMarker(feature, latlng, 'villages');
     }
 }).addTo(map);
+
 
     // Highlight and zoom to matching features
     selectedLayers.forEach(function (layerName) {
@@ -152,9 +166,17 @@ var villagesLayer = L.geoJSON.ajax('src/villages.geojson', {
   var icons = {
       hotels: L.icon({ iconUrl: 'icons/hotel.svg', iconSize: [20, 20] }),
       touristpoints: L.icon({ iconUrl: 'icons/touristpoint.svg', iconSize: [35, 35] }),
-      passes: L.icon({ iconUrl: 'icons/passes.svg', iconSize: [35, 35] }),
+      passes: L.icon({ iconUrl: 'icons/village1.svg', iconSize: [15, 15] }),
       glaciers: L.icon({ iconUrl: 'icons/glacier.png', iconSize: [15, 15] }),
-      villages: L.icon({ iconUrl: 'icons/village.svg', iconSize: [20, 20] }),
+      villages: L.icon({ iconUrl: 'icons/village.svg', iconSize: [15, 15] }),
+      villages1: L.icon({ iconUrl: 'icons/village1.svg', iconSize: [20, 20] }), // Proper icon
+      highlighted: L.icon({
+          iconUrl: 'icons/highlighted-marker.svg',
+          iconSize: [50, 50],
+          iconAnchor: [25, 50],
+          popupAnchor: [0, -50],
+          className: 'bubble-marker'
+      }),
 
     highlighted: L.icon({ iconUrl: 'icons/highlighted-marker.svg', iconSize: [30, 30] })
       // Add other icons as needed
@@ -172,72 +194,8 @@ var villagesLayer = L.geoJSON.ajax('src/villages.geojson', {
       //    return pointToLayer(feature, latlng, 'hotels');
     //  }
   //}).addTo(map);
-  var hotelsLayer = L.geoJSON.ajax('src/hotels1.geojson', {
-pointToLayer: function(feature, latlng) {
-  var marker = L.marker(latlng, { icon: icons.hotels });
 
-  if (feature.properties) {
-      var popupContent = '';
-      if (feature.properties.name) {
-          popupContent += '<strong>' + feature.properties.name + '</strong><br>';
-      }
-      if (feature.properties.imageUrl) {
-        popupContent += `
-            <img src="${feature.properties.imageUrl}" 
-                 alt="${feature.properties.name}" 
-                 style="width:300px; height:200px; cursor:pointer; border:2px solid black;" 
-                 onclick="openLargeImage('${feature.properties.imageUrl}')">
-        `;
-    }
-      if (feature.properties.Type) {
-          popupContent += '<strong> ' + feature.properties.Type + '</strong>';
-      }
-      marker.bindPopup(popupContent, { autoClose: false });
-  }
-
-  return marker;
-},
-onEachFeature: function(feature, layer) {
-  // Check if the feature has a property 'name' and bind a tooltip
-  if (feature.properties && feature.properties.name) {
-      layer.bindTooltip(feature.properties.name, { permanent: false, direction: 'auto' });
-  }
-}
-}).addTo(map);
-
-
-  var touristPointsLayer = L.geoJSON.ajax('src/touristpoints1.geojson', {
-      pointToLayer: function(feature, latlng) {
-  var marker = L.marker(latlng, { icon: icons.touristpoints });
-
-  if (feature.properties) {
-      var popupContent = '';
-      if (feature.properties.name) {
-          popupContent += '<strong>'+feature.properties.name +'</strong>'+ '<br>';
-      }
-      if (feature.properties.desc) {
-          popupContent += feature.properties.desc;
-      }
-      if (feature.properties.imageUrl) {
-          popupContent += '<img src="' + feature.properties.imageUrl + '" alt="' + feature.properties.name + '" style="width:300px; height:200px;">';
-}
-      marker.bindPopup(popupContent, { autoClose: false });
-  }
-
-  return marker;
-},
-onEachFeature: function(feature, layer) {
-  // Check if the feature has a property 'name' and bind a tooltip
-  if (feature.properties && feature.properties.name) {
-      layer.bindTooltip(feature.properties.name, { permanent: false, direction: 'auto' });
-  }
-}
-}).addTo(map);
-
-
-
-
-  var passesLayer = L.geoJSON.ajax('src/passes1.geojson', {
+  var passesLayer = L.geoJSON.ajax('src/passes.geojson', {
       pointToLayer: function(feature, latlng) {
   var marker = L.marker(latlng, { icon: icons.passes });
 
@@ -250,7 +208,7 @@ onEachFeature: function(feature, layer) {
           popupContent +=feature.properties.desc;
       }
       if (feature.properties.imageUrl) {
-          popupContent += '<img src="' + feature.properties.imageUrl + '" alt="' + feature.properties.name + '" style="width:600px; height:500px;">';
+          popupContent += '<img src="' + feature.properties.imageUrl + '" alt="' + feature.properties.name + '" style="width:300px; height:200px; cursor:pointer; border:2px solid black;">';
 }
 
       marker.bindPopup(popupContent, { autoClose: false });
@@ -266,32 +224,6 @@ onEachFeature: function(feature, layer) {
 }
 }).addTo(map);
 
-var glaciersLayer = L.geoJSON.ajax('src/glaciers1.geojson', {
-style: function(feature) {
-  return {
-      color: '#87CEEB', // Bright sky blue color for the border
-      weight: 1, // Minimal border weight
-      opacity: 1,
-      fillColor: '#FFFFFF', // White color for the fill
-      fillOpacity: 0.7 // Slightly transparent fill
-  };
-}
-// other options...
-}).addTo(map);
-
-  // Define and load road layers (with color styling)
-  var highwaysLayer = L.geoJSON.ajax('src/highway1.geojson', {
-style: { color: 'blue' },
-onEachFeature: function (feature, layer) {
-  // Assuming your GeoJSON features have a property you want to show, for example, 'name'
-  if (feature.properties && feature.properties.name) {
-      layer.bindTooltip(feature.properties.name, { permanent: false, direction: 'auto' });
-  }
-}
-}).addTo(map);
-  var linkRoadsLayer = L.geoJSON.ajax('src/linkroads1.geojson', {style: {color: 'black'}}).addTo(map);
- 
-  var residentRoadsLayer = L.geoJSON.ajax('src/residential1.geojson', {style: {color: 'yellow'}}).addTo(map);
 
   var villagesLayer = L.geoJSON.ajax('src/villages.geojson', {
       pointToLayer: function(feature, latlng) {
@@ -323,64 +255,6 @@ onEachFeature: function(feature, layer) {
 }).addTo(map);
 
 
-
-  
-// Load and style the GeoJSON tracks
-var tracksLayer = L.geoJSON.ajax('src/tracks.geojson', {
-    style: function(feature) {
-        // Color tracks based on their condition
-        return {
-            color: feature.properties.Total > 3 ? 'red' :
-                   feature.properties.Total > 1 ? 'orange' : 'green',
-            weight: 5,
-            opacity: 0.8
-        };
-    },
-    onEachFeature: function(feature, layer) {
-        // Add tooltip with name
-        if (feature.properties && feature.properties.name) {
-            layer.bindTooltip(feature.properties.name, {
-                permanent: false,
-                direction: 'auto',
-                className: 'custom-tooltip'
-            });
-        }
-        
-        // Add detailed popup
-        if (feature.properties) {
-            layer.bindPopup(`
-                <h3>${feature.properties.name || 'Unnamed Track'}</h3>
-                <p><strong>Reference:</strong> ${feature.properties.ref || 'N/A'}</p>
-                <p><strong>Type:</strong> ${feature.properties.type || 'N/A'}</p>
-                <hr>
-                <h4>Condition Metrics</h4>
-                <p>Total Issues: ${feature.properties.Total || 0}</p>
-                <p>Potholes: ${feature.properties.Potholes || 0}</p>
-                <p>Expansion Joints: ${feature.properties.Exp_Joints || 0}</p>
-            `);
-        }
-    }
-}).addTo(map);
-
-// Add legend
-var legend = L.control({position: 'bottomright'});
-legend.onAdd = function(map) {
-    var div = L.DomUtil.create('div', 'info legend');
-    div.innerHTML = `
-        <h4>Track Condition</h4>
-        <div><span style="background:red"></span> Good (0-1 issues)</div>
-        <div><span style="background:red"></span> Fair (2-3 issues)</div>
-        <div><span style="background:red"></span> Poor (4+ issues)</div>
-    `;
-    return div;
-};
-legend.addTo(map);
-
-
-
-
-
-  // Functions to update layer visibility
   function toggleLayer(checkboxId, layer) {
       var checkbox = document.getElementById(checkboxId);
       checkbox.addEventListener('change', function() {
@@ -395,28 +269,15 @@ legend.addTo(map);
      
   // Toggle layers based on checkboxes
   toggleLayer('boundaryCheckbox', boundaryLayer);
-  toggleLayer('hotelCheckbox', hotelsLayer);
-  toggleLayer('highwaysCheckbox', highwaysLayer);
-  toggleLayer('linkRoadsCheckbox', linkRoadsLayer);
-  toggleLayer('residentRoadsCheckbox', residentRoadsLayer);
-  toggleLayer('touristPointsCheckbox', touristPointsLayer);
   toggleLayer('villagesCheckbox', villagesLayer);
   toggleLayer('passesCheckbox', passesLayer);
-  toggleLayer('tracksCheckbox', tracksLayer);
-  toggleLayer('glaciersCheckbox', glaciersLayer);
 
 // Function to update the legend based on selected layers
 function updateLegend() {
 var layersInfo = {
   "Boundary": { layer: boundaryLayer, color: "blue", type: "line" },
-  "Hotels": { layer: hotelsLayer, icon: icons.hotels, type: "point" },
-  "Tourist Points": { layer: touristPointsLayer, icon: icons.touristpoints, type: "point" },
   "Potholes": { layer: villagesLayer, icon: icons.villages, type: "point" },
-  "Passes": { layer: passesLayer, icon: icons.passes, type: "point" },
-  "Highways": { layer: highwaysLayer, color: "blue", type: "line" },
-  "Link Roads": { layer: linkRoadsLayer, color: "black", type: "line" },
-  "Residential Roads": { layer: residentRoadsLayer, color: "yellow", type: "line" },
-  "Tracks": { layer: tracksLayer, color: "green", type: "line" }
+  "Parking, Encroachment, Sewage": { layer: passesLayer, icon: icons.passes, type: "point" }
   
   // Add other layers as needed
 };
@@ -450,18 +311,33 @@ if (legendDiv) {
   };
   legend.addTo(map);
 
-  // Create and add a label control for "@geomapink.com"
-  var label = L.control({ position: 'bottomright' }); // Position doesn't matter due to absolute CSS
-label.onAdd = function(map) {
-var div = L.DomUtil.create('div', 'map-label');
-div.innerHTML = 'Project of NCRG:IST Karachi <br> Developed by Israr Ahmad<br> @GEO-MAP-INK';
-return div;
+// Create and add a label control for "@geomapink.com"
+// Create and add a label control for "@geomapink.com"
+var label = L.control({ position: 'bottomright' });
 
+label.onAdd = function(map) {
+  var div = L.DomUtil.create('div', 'map-label');
+  div.innerHTML = 'TRIP road safety program';
+  div.style.backgroundColor = 'white';
+  div.style.padding = '2px 6px';           // Smaller padding
+  div.style.borderRadius = '4px';
+  div.style.boxShadow = '0 1px 5px rgba(0,0,0,0.3)';
+  div.style.fontSize = '11px';            // Smaller text
+  div.style.marginBottom = '10px';        // Push it further down
+  return div;
 };
+
 label.addTo(map);
-  // Initial call to update the legend and event listener for layer changes
-  updateLegend();
-  map.on('overlayadd overlayremove', updateLegend);
+
+// Initial call to update the legend and event listener for layer changes
+updateLegend();
+map.on('overlayadd overlayremove', updateLegend);
+
+
+// Initial call to update the legend and event listener for layer changes
+updateLegend();
+map.on('overlayadd overlayremove', updateLegend);
+
 
 
   function printMap() {
@@ -520,4 +396,55 @@ map.on(L.Draw.Event.CREATED, function(event) {
   var layer = event.layer;
   drawnItems.addLayer(layer);
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'sidebar-toggle';
+    toggleBtn.innerHTML = '☰ Menu';
+    document.body.appendChild(toggleBtn);
+    
+    const sidebar = document.querySelector('.right-sidebar');
+    
+    toggleBtn.addEventListener('click', function() {
+        sidebar.classList.toggle('open');
+        toggleBtn.classList.toggle('hidden');
+    });
+    
+    // Close sidebar when clicking outside
+    document.addEventListener('click', function(e) {
+        if (sidebar.classList.contains('open') && 
+            !sidebar.contains(e.target) && 
+            e.target !== toggleBtn) {
+            sidebar.classList.remove('open');
+            toggleBtn.classList.remove('hidden');
+        }
+    });
+    
+    // Your existing image modal code
+    const images = document.querySelectorAll('.bubble-marker img');
+    const closeButtons = document.querySelectorAll('.close-fullscreen');
+    
+    images.forEach((image, index) => {
+        image.addEventListener('click', function() {
+            this.classList.toggle('full-screen-image');
+            closeButtons[index].style.display = this.classList.contains('full-screen-image') ? 'block' : 'none';
+        });
+    });
+    
+    closeButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            images[index].classList.remove('full-screen-image');
+            this.style.display = 'none';
+        });
+    });
+});
+
+function openLargeImage(imageUrl) {
+    document.getElementById("largeImage").src = imageUrl;
+    document.getElementById("imageModal").style.display = "block";
+}
+
+function closeLargeImage() {
+    document.getElementById("imageModal").style.display = "none";
+}
 
